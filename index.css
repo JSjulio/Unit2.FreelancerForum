@@ -2,15 +2,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Ensure full height of the viewport */
-  margin: 0; /* Remove default margin */
+  height: 100vh; 
+  margin: 0; 
 }
 
 .container {
   text-align: center;
 }
 
-/* Add your CSS styles for freelancers list here */
 ul {
   list-style-type: none;
   padding: 0;
