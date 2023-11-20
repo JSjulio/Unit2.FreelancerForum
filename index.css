@@ -1,55 +1,28 @@
-ul {
+body {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ensure full height of the viewport */
+  margin: 0; /* Remove default margin */
+}
+
+.container {
+  text-align: center;
+}
+
+/* Add your CSS styles for freelancers list here */
+ul {
   list-style-type: none;
+  padding: 0;
 }
 
-li {
-  border: solid 1px black;
-  margin: 1rem;
+.freelancer {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-#circle > li {
-  border-radius: 50%;
-}
-
-/* Colors */
-.red {
-  background-color: red;
-}
-
-.orange {
-  background-color: orange;
-}
-
-.yellow {
-  background-color: yellow;
-}
-
-.green {
-  background-color: green;
-}
-
-.blue {
-  background-color: blue;
-}
-
-.purple {
-  background-color: purple;
-}
-
-/* Sizes */
-.small {
-  width: 25px;
-  height: 25px;
-}
-
-.medium {
-  width: 50px;
-  height: 50px;
-}
-
-.large {
-  width: 100px;
-  height: 100px;
+#averageText {
+  margin-top: 20px;
 }

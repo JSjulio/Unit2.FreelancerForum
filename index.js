@@ -1,27 +1,9 @@
 /* State */
-// Here, we define variables for the data that our program needs to remember.
-// We call this data "state" because it represents the state of our program.
+const freelancers = [];
+const maxFreelancers = 10;
 
-// TODO: Add support for more colors
-const colors = ["red", "green", "blue", "orange", "yellow", "purple"];
-const sizes = ["small", "medium", "large"];
-const maxShapes = 10;
-const shapes = [
-  {
-    color: "red",
-    size: "small",
-  },
-  {
-    color: "yellow",
-    size: "small",
-  },
-];
-
-// `setInterval` will call `addShape` every 1000 milliseconds (1 second)
-// and return an interval ID that we can use to stop the interval later.
-// Calling `clearInterval(addShapeIntervalId)` will stop the interval.
-const addShapeIntervalId = setInterval(addShape, 1000);
-
+// `setInterval` will call `addFreelancer` every 3000 milliseconds (3 seconds)
+const addFreelancerIntervalId = setInterval(addFreelancer, 3000);
 
 render(); // We call this function once to render the initial state
 
@@ -30,44 +12,47 @@ render(); // We call this function once to render the initial state
  * The term "render" is often used to describe this process.
  */
 function render() {
-  // Render the squares
-  const squares = document.querySelector("#squares");
-  const squareElements = shapes.map((shape) => {
+  // Render the freelancers
+  const freelancersList = document.querySelector("#freelancers");
+  const freelancerElements = freelancers.map((freelancer) => {
     const element = document.createElement("li");
-    element.classList.add(shape.color, shape.size);
+    element.classList.add("freelancer");
+    element.innerHTML = `<strong>Name:</strong> ${freelancer.name}, <strong>Occupation:</strong> ${freelancer.occupation}, <strong>Starting Price:</strong> $${freelancer.startingPrice}`;
     return element;
   });
-  squares.replaceChildren(...squareElements);
+  freelancersList.replaceChildren(...freelancerElements);
 
-    // TODO: Render the circles
-  const circles = document.querySelector("#circle");
-  const circleElements = shapes.map((shape) => {
-    const element = document.createElement("li");
-    element.classList.add("circle", shape.color, shape.size);
-    return element;
-  });
-  circles.replaceChildren(...circleElements);
+  // Render the average starting price
+  const averageText = document.querySelector("#averageText");
+  const averagePrice = calculateAverageStartingPrice();
+  averageText.textContent = `Average Starting Price: $${averagePrice.toFixed(2)}`;
 }
 
-
-
 /**
- * Add a random shape to the `shapes` array
+ * Add a random freelancer to the `freelancers` array
  */
-function addShape() {
-  const color = colors[Math.floor(Math.random() * colors.length)];
+function addFreelancer() {
+  const names = ["Alice", "Bob", "Carol", "David", "Eva"];
+  const occupations = ["Writer", "Teacher", "Programmer", "Designer", "Translator"];
+  const startingPrice = Math.floor(Math.random() * 100) + 30; // Random starting price between $30 and $129
 
-  // TODO: Randomize the size of the shape
-  const size = sizes[Math.floor(Math.random() * sizes.length)];
+  const randomName = names[Math.floor(Math.random() * names.length)];
+  const randomOccupation = occupations[Math.floor(Math.random() * occupations.length)];
 
-  shapes.push({ color, size});
+  const newFreelancer = { name: randomName, occupation: randomOccupation, startingPrice };
+  freelancers.push(newFreelancer);
 
   render();
 
-
-if (shapes.length >= maxShapes) {
-  clearInterval(addShapeIntervalId)
+  if (freelancers.length >= maxFreelancers) {
+    clearInterval(addFreelancerIntervalId);
+  }
 }
 
+/**
+ * Calculate the average starting price of all freelancers
+ */
+function calculateAverageStartingPrice() {
+  const totalStartingPrice = freelancers.reduce((sum, freelancer) => sum + freelancer.startingPrice, 0);
+  return freelancers.length === 0 ? 0 : totalStartingPrice / freelancers.length;
 }
-
